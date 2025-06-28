@@ -16,6 +16,7 @@ import { AppConfigService } from 'src/global/services/app-config.service';
 import { EmailService } from 'src/global/services/mail.service';
 import { CreateUserAccountDTO } from './create-account.dto';
 import { AuthSharedService } from '../../shared/auth-shared.service';
+import { roles } from 'src/global/types/enums/role.enum';
 
 @Injectable()
 export class CreateUserAccountUseCase {
@@ -43,12 +44,14 @@ export class CreateUserAccountUseCase {
     const confirmationUrl = `${data.metadata.redirectURL}?token=${token}`;
 
     try {
+      const roleId = roles[data.role];
+
       const newUser = UserEntity.create({
         username: data.username,
         email: data.email,
         password: await this.shared.hashPassword(data.password),
         providerId: this.config.emailProviderId,
-        roleId: this.config.defaultRoleId,
+        roleId,
       });
 
       const newUserCreated = await this.user.create(newUser);

@@ -6,6 +6,7 @@ import { AppConfigService } from 'src/global/services/app-config.service';
 import {
   InvalidUserLoginException,
   UserEntity,
+  UserInvalidCredentialsException,
   UserProfileEntity,
   UserProfileRepository,
   UserRepository,
@@ -13,6 +14,11 @@ import {
 import { GoogleSocialLoginDTO } from './google.dto';
 import { AuthSharedService } from '../../shared/auth-shared.service';
 import { GoogleUserCredentials, GoogleUserInfo } from './google.types';
+import {
+  ClientRoleE,
+  roles,
+  UniversityMemberE,
+} from 'src/global/types/enums/role.enum';
 
 @Injectable()
 export class GoogleSocialLoginUseCase {
@@ -37,15 +43,19 @@ export class GoogleSocialLoginUseCase {
       throw new BadRequestException();
 
     const userInfo = await this._getUserinfo(data.code);
-
     const user = await this.user.findByEmail(userInfo.email);
 
     if (!user) {
+      if (!this._isValidUserRole(userInfo.email, data.role))
+        throw new UserInvalidCredentialsException();
+
+      const roleId = roles[data.role];
+
       const newUser = UserEntity.create({
         username: await this.shared.generateUsername(userInfo.email),
         email: userInfo.email,
         providerId: this.config.googleProviderId,
-        roleId: this.config.defaultRoleId,
+        roleId: roleId,
       });
       newUser.isEmailVerified = true;
 
@@ -90,6 +100,21 @@ export class GoogleSocialLoginUseCase {
       return this.jwt.decode<GoogleUserInfo>(response.data.id_token);
     } catch {
       throw new InvalidUserLoginException();
+    }
+  }
+
+  _isValidUserRole(email: string, role: unknown) {
+    const domain = email.split('@')[1];
+    const isUniversityMember = domain === 'unitru.edu.pe';
+
+    if (isUniversityMember) {
+      // Debe ser docente o estudiante
+      return Object.values(UniversityMemberE).includes(
+        role as UniversityMemberE,
+      );
+    } else {
+      // Debe ser cliente
+      return Object.values(ClientRoleE).includes(role as ClientRoleE);
     }
   }
 }

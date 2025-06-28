@@ -1,3 +1,4 @@
+import { Transform } from 'class-transformer';
 import {
   IsEmail,
   IsString,
@@ -5,7 +6,9 @@ import {
   MinLength,
   Matches,
   MaxLength,
+  IsEnum,
 } from 'class-validator';
+import { ClientRoleE } from 'src/global/types/enums/role.enum';
 
 export class CreateUserAccountDTO {
   @IsString()
@@ -40,4 +43,8 @@ export class CreateUserAccountDTO {
     },
   )
   password: string;
+
+  @Transform(({ value }) => (value as string).toLowerCase())
+  @IsEnum(ClientRoleE, { message: 'role must be a valid Role value' })
+  role: ClientRoleE;
 }

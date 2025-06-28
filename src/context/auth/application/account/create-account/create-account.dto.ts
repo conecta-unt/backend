@@ -1,3 +1,5 @@
+import { ClientRoleE } from 'src/global/types/enums/role.enum';
+
 export interface CreateUserAccountDTO {
   metadata: {
     redirectURL?: string;
@@ -7,4 +9,5 @@ export interface CreateUserAccountDTO {
   lastname: string;
   email: string;
   password: string;
+  role: ClientRoleE;
 }

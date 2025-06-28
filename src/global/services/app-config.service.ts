@@ -8,7 +8,7 @@ export class AppConfigService {
   //   App Configuration
 
   get serviceName(): string {
-    return 'Cerbeus Auth Template';
+    return 'Conecta UNT';
   }
 
   get globalPrefix(): string {
@@ -47,12 +47,20 @@ export class AppConfigService {
     return 2;
   }
 
-  get githubProviderId(): number {
+  get individualClientRoleId(): number {
+    return 1;
+  }
+
+  get bussinesClientRoleId(): number {
+    return 2;
+  }
+
+  get teacherROleId(): number {
     return 3;
   }
 
-  get defaultRoleId(): number {
-    return 1; // USER
+  get studentRoleId(): number {
+    return 4;
   }
 
   // Secrets
@@ -113,14 +121,6 @@ export class AppConfigService {
     return this.config.get<string>('GOOGLE_CLIENT_SECRET') || '';
   }
 
-  get githubClientID(): string {
-    return this.config.get<string>('GITHUB_CLIENT_ID') || '';
-  }
-
-  get githubClientSecret(): string {
-    return this.config.get<string>('GITHUB_CLIENT_SECRET') || '';
-  }
-
   // Database Configuration
 
   get mainDatabase(): {
@@ -135,7 +135,7 @@ export class AppConfigService {
       type: 'mysql',
       host: 'localhost',
       port: 3306,
-      database: this.config.get<string>('MAIN_DATABASE_NAME') || 'cerbeus',
+      database: this.config.get<string>('MAIN_DATABASE_NAME') || 'conectaunt',
       username: this.config.get<string>('MAIN_DATABASE_USER') || 'root',
       password: this.config.get<string>('MAIN_DATABASE_PASSWORD') || 'password',
     };

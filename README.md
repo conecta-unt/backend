@@ -1,28 +1,19 @@
-# Cerberus Auth Template
+# Conecta UNT
 
-**Cerberus** is a robust NestJS authentication template built using **Hexagonal Architecture**, **TypeORM**, **Role-Based Access Control**, and **Multi-Factor Authentication** — designed to protect your app’s core like a true gatekeeper.
+Plataforma web para conectar estudiantes y profesores con oportunidades reales de colaboración.
 
 ---
 
-## 📊 Resources
+## 🚀 Inicialización del proyecto
 
-- [Database diagram (Auth)](https://dbdesigner.page.link/uFMNCMAJ2JCUsJko7)
-
-## 🚀 Project Setup
-
-### 1. Clone the repository
+### 1. Clona el repositorio
 
 ```bash
-git clone https://github.com/griego-stack/cerberus-auth-template.git
-cd cerberus-auth-template
+git clone https://github.com/conecta-unt/backend.git
+cd backend
 ```
 
-Or use it as a template:
-**`https://github.com/griego-stack/cerberus-auth-template`**
-
----
-
-### 2. Install dependencies
+### 2. Instala las dependencias
 
 ```bash
 npm install
@@ -30,18 +21,15 @@ npm install
 
 ---
 
-### 3. Create the databases
+### 3. Crea la base de datos
 
-Make sure you have the following MySQL databases:
-
-- Main database: `cerbeus`
-- Logs database: `cerbeus-logs`
+Crea la base de datos `conectaunt`
 
 ---
 
-### 4. Configure environment variables
+### 4. Configura las variables de entorno
 
-Create a `.env` file at the root and define your environment variables:
+Crea un archivo `.env` en el root del proyecto, y configura las siguientes variables de entorno:
 
 ```env
 # App Configuration
@@ -64,8 +52,6 @@ EMAIL_HOST_PASSWORD=your-host-password
 # Social
 GOOGLE_CLIENT_ID=your-google-client-id
 GOOGLE_CLIENT_SECRET=your-google-client-secret
-GITHUB_CLIENT_ID=your-github-client-id
-GITHUB_CLIENT_SECRET=your-github-client-secret
 
 # Database Configuration
 MAIN_DATABASE_NAME=cerbeus
@@ -73,22 +59,8 @@ MAIN_DATABASE_USER=your-user
 MAIN_DATABASE_PASSWORD=your-password
 ```
 
----
-
-### 5. Customize the application
-
-Go to
-`src/global/services/app-config.service.ts`
-and feel free to customize it to fit your project.
-
----
-
-### 6. Seed the database with initial values
-
-Edit the seed files located in the `seed/` directory as needed, then run:
+### Inicializa la base de datos
 
 ```bash
 npm run seed
 ```
-
-This will populate the `provider` and `role` tables with the initial values required by the system.

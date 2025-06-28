@@ -4,7 +4,6 @@ import {
   ConfirmChangePasswordController,
   ConfirmUserAccountController,
   CreateUserAccountController,
-  GithubSocialLoginController,
   GoogleSocialLoginController,
   RefreshConfirmationTokenController,
   RefreshTokenController,
@@ -18,7 +17,6 @@ import {
   ConfirmChangePasswordUseCase,
   ConfirmUserAccountUseCase,
   CreateUserAccountUseCase,
-  GithubSocialLoginUseCase,
   GoogleSocialLoginUseCase,
   RefreshTokenUseCase,
   RequestChangePasswordUseCase,
@@ -57,7 +55,6 @@ import {
     ChangePasswordController,
     // Social
     GoogleSocialLoginController,
-    GithubSocialLoginController,
   ],
   providers: [
     // Shared
@@ -76,7 +73,6 @@ import {
     ChangePasswordUseCase,
     // Social
     GoogleSocialLoginUseCase,
-    GithubSocialLoginUseCase,
     // Repositories
     {
       provide: UserConfirmationTokenRepository,
@@ -119,7 +115,6 @@ import {
     ChangePasswordUseCase,
     // Social
     GoogleSocialLoginUseCase,
-    GithubSocialLoginUseCase,
     // Repositories
     InDatabaseUserConfirmationTokenRepository,
     InDatabaseUserLoginAttemptsRepository,

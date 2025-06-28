@@ -8,5 +8,4 @@ export * from './session/login/login.use-case';
 export * from './session/logout/logout.use-case';
 export * from './session/refresh-token/refresh-token.use-case';
 export * from './shared/auth-shared.service';
-export * from './social/github/github.use-case';
 export * from './social/google/google.use-case';
