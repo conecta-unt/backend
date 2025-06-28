@@ -20,7 +20,7 @@ const dataSource = new DataSource({
   port: 3306,
   username: 'root',
   password: 'mysql',
-  database: 'cerbeus',
+  database: 'conectaunt',
   synchronize: true,
   entities: [
     UserConfirmationToken,
