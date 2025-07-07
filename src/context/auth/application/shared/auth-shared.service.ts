@@ -32,8 +32,8 @@ export class AuthSharedService {
   cookieConfig: CookieSerializeOptions = {
     path: '/',
     httpOnly: true,
-    sameSite: 'none',
-    secure: true,
+    sameSite: 'strict',
+    secure: false,
   };
 
   createToken() {

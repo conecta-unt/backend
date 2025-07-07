@@ -46,6 +46,7 @@ export class GoogleSocialLoginUseCase {
     const user = await this.user.findByEmail(userInfo.email);
 
     if (!user) {
+      if (!data.role) throw new BadRequestException();
       if (!this._isValidUserRole(userInfo.email, data.role))
         throw new UserInvalidCredentialsException();
 

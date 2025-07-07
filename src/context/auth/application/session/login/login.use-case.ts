@@ -39,7 +39,7 @@ export class UserLoginUseCase {
       else if (!user.isEmailVerified) throw new UserEmailNotVerifiedException();
       else if (!user.isActive) throw new UserInactiveException();
       else if (
-        user.providerId !== this.config.googleProviderId ||
+        user.providerId !== this.config.emailProviderId ||
         !user.password
       )
         throw new InvalidUserProviderException();

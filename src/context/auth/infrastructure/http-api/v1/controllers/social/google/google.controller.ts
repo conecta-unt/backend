@@ -3,7 +3,6 @@ import { Controller, Get, Query, Req, Res } from 'src/bootstrap';
 import { AUTH_API_V1_BASE_PATH } from '../../../constants';
 import { GoogleSocialLoginUseCase } from 'src/context/auth/application';
 import { RoleE } from 'src/global/types/enums/role.enum';
-import { RoleValidationPipe } from 'src/global/pipes/role-validation.pipe';
 
 @Controller(`${AUTH_API_V1_BASE_PATH}/social/google`)
 export class GoogleSocialLoginController {
@@ -16,7 +15,7 @@ export class GoogleSocialLoginController {
     @Query('code') code: string,
     @Query('redirect-url') redirectUrl: string,
     @Query('redirect-error-url') redirectErrorUrl: string,
-    @Query('role', RoleValidationPipe) role: RoleE,
+    @Query('role') role: RoleE,
   ) {
     return this.google.execute(req, res, {
       code,

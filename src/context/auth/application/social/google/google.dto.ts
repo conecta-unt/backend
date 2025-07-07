@@ -6,5 +6,5 @@ export class GoogleSocialLoginDTO {
     redirectErrorUrl: string;
   };
   code: string;
-  role: RoleE;
+  role?: RoleE;
 }
