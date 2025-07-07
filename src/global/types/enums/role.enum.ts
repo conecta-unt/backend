@@ -1,6 +1,6 @@
 export enum ClientRoleE {
   INDIVIDUAL_CLIENT = 'individual_client',
-  BUSINESS_CLIENT = 'business_client',
+  BUSSINES_CLIENT = 'bussines_client',
 }
 
 export enum UniversityMemberE {
@@ -10,14 +10,14 @@ export enum UniversityMemberE {
 
 export enum RoleE {
   INDIVIDUAL_CLIENT = 'individual_client',
-  BUSINESS_CLIENT = 'business_client',
+  BUSSINES_CLIENT = 'bussines_client',
   STUDENT = 'student',
   TEACHER = 'teacher',
 }
 
 export const roles = {
   individual_client: 1,
-  business_client: 2,
+  bussines_client: 2,
   student: 3,
   teacher: 4,
 };

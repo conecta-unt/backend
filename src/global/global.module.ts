@@ -8,6 +8,7 @@ import { EmailService } from './services/mail.service';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { MailerProvider } from './providers/mailer.provider';
 import { databaseProviders } from './providers/database.provider';
+import { AuthGuard } from './guards/auth.guard';
 
 @Global()
 @Module({
@@ -22,12 +23,14 @@ import { databaseProviders } from './providers/database.provider';
     EmailService,
     ErrorResponseNormalizerFilter,
     ...databaseProviders,
+    AuthGuard,
   ],
   exports: [
     AppConfigService,
     EmailService,
     ErrorResponseNormalizerFilter,
     ...databaseProviders,
+    AuthGuard,
   ],
 })
 export class GlobalModule {}

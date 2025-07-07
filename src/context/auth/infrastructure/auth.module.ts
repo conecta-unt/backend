@@ -28,10 +28,14 @@ import {
   UserConfirmationTokenRepository,
   UserLoginAttempsRepository,
   UserProfileRepository,
+  UserProviderRepository,
   UserRefreshTokenRepository,
   UserRepository,
+  UserRoleRepository,
 } from '../domain';
 import {
+  InDatabaseProviderRepository,
+  InDatabaseRoleRepository,
   InDatabaseUserConfirmationTokenRepository,
   InDatabaseUserLoginAttemptsRepository,
   InDatabaseUserProfileRepository,
@@ -87,6 +91,14 @@ import {
       useClass: InDatabaseUserProfileRepository,
     },
     {
+      provide: UserRoleRepository,
+      useClass: InDatabaseRoleRepository,
+    },
+    {
+      provide: UserProviderRepository,
+      useClass: InDatabaseProviderRepository,
+    },
+    {
       provide: UserRefreshTokenRepository,
       useClass: InDatabaseUserRefreshTokenRepository,
     },
@@ -97,6 +109,8 @@ import {
     InDatabaseUserConfirmationTokenRepository,
     InDatabaseUserLoginAttemptsRepository,
     InDatabaseUserProfileRepository,
+    InDatabaseRoleRepository,
+    InDatabaseProviderRepository,
     InDatabaseUserRefreshTokenRepository,
     InDatabaseUserRepository,
   ],
@@ -119,6 +133,8 @@ import {
     InDatabaseUserConfirmationTokenRepository,
     InDatabaseUserLoginAttemptsRepository,
     InDatabaseUserProfileRepository,
+    InDatabaseRoleRepository,
+    InDatabaseProviderRepository,
     InDatabaseUserRefreshTokenRepository,
     InDatabaseUserRepository,
   ],

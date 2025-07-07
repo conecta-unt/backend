@@ -8,5 +8,7 @@ export * from './entities/user.entity';
 export * from './repositories/in-db-confirmation-token.repository';
 export * from './repositories/in-db-login-attemps.repository';
 export * from './repositories/in-db-profile.repository';
+export * from './repositories/in-db-provider.repository';
 export * from './repositories/in-db-refresh-token.repository';
+export * from './repositories/in-db-role.repository';
 export * from './repositories/in-db-user.repository';

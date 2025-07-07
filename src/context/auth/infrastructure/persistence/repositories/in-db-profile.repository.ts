@@ -11,6 +11,7 @@ export class InDatabaseUserProfileRepository implements UserProfileRepository {
   async findOne(userId: number): Promise<UserProfileEntity | null> {
     const userProfile = await UserProfile.findOne({
       where: { user: { id: userId } },
+      relations: ['user'],
     });
 
     return userProfile

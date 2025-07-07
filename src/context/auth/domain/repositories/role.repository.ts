@@ -1,6 +1,5 @@
-import { CreateUserRoleDTO, UserRoleEntity } from '../entities/role.entity';
+import { UserRoleEntity } from '../entities/role.entity';
 
 export abstract class UserRoleRepository {
-  abstract findAll(): Promise<UserRoleEntity[]>;
-  abstract create(data: CreateUserRoleDTO): Promise<UserRoleEntity>;
+  abstract findOne(id: number): Promise<UserRoleEntity | null>;
 }
