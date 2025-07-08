@@ -1,5 +1,5 @@
 import { FastifyRequest } from 'fastify';
-import { Controller, Get, Req, UseGuards } from 'src/bootstrap';
+import { Controller, Get, Query, Req, UseGuards } from 'src/bootstrap';
 import { USER_API_V1_BASE_PATH } from '../../../constants';
 import { GetUserProfileUseCase } from 'src/context/user/application';
 import { AuthGuard } from 'src/global/guards/auth.guard';
@@ -10,7 +10,7 @@ export class GetUserProfileController {
 
   @Get()
   @UseGuards(AuthGuard)
-  run(@Req() req: FastifyRequest) {
-    return this.profile.execute(req);
+  run(@Req() req: FastifyRequest, @Query('q') q: string | undefined) {
+    return this.profile.execute(req, q);
   }
 }

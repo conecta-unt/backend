@@ -18,11 +18,15 @@ export class GetUserProfileUseCase {
     private readonly role: InDatabaseRoleRepository,
   ) {}
 
-  async execute(req: FastifyRequest) {
+  async execute(req: FastifyRequest, q: string | undefined) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const userPayload = (req as any).userPayload as UserPayload;
 
-    const user = await this.user.findById(userPayload.id);
+    console.log(q);
+
+    const user = q
+      ? await this.user.findByUsername(q)
+      : await this.user.findById(userPayload.id);
 
     if (!user) throw new UserNotFoundException();
 
