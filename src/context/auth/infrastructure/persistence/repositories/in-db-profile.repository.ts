@@ -31,12 +31,26 @@ export class InDatabaseUserProfileRepository implements UserProfileRepository {
     return this._createUserProfileEntityInstance(savedUserProfile);
   }
 
+  async update(data: UserProfileEntity): Promise<void> {
+    await UserProfile.update(data.user_id, {
+      firstname: data.firstname,
+      lastname: data.lastname,
+      profileImage: data.profileImage,
+      major: data.major,
+      area: data.area,
+      bio: data.bio,
+    });
+  }
+
   _createUserProfileEntityInstance(data: UserProfile): UserProfileEntity {
     return UserProfileEntity.create({
       user_id: data.user.id,
       firstname: data.firstname,
       lastname: data.lastname,
       profileImage: data.profileImage,
+      major: data.major,
+      area: data.area,
+      bio: data.bio,
     });
   }
 }

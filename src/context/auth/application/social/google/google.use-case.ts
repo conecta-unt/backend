@@ -46,7 +46,13 @@ export class GoogleSocialLoginUseCase {
     const user = await this.user.findByEmail(userInfo.email);
 
     if (!user) {
-      if (!data.role) throw new BadRequestException();
+      if (!data.role) {
+        res.redirect(
+          `${data.metadata.redirectErrorUrl}?error=account_not_found`,
+          302,
+        );
+        return;
+      }
       if (!this._isValidUserRole(userInfo.email, data.role))
         throw new UserInvalidCredentialsException();
 

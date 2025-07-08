@@ -25,4 +25,13 @@ export class UserProfile extends BaseEntity {
 
   @Column({ type: 'varchar', length: 255, nullable: true })
   profileImage?: string;
+
+  @Column({ type: 'varchar', length: 50, nullable: true })
+  major: string;
+
+  @Column({ type: 'text', nullable: true })
+  area: string;
+
+  @Column({ type: 'text', nullable: true })
+  bio: string;
 }

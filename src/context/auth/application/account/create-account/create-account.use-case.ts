@@ -58,7 +58,7 @@ export class CreateUserAccountUseCase {
 
       const newUserProfile = UserProfileEntity.create({
         firstname: data.firstname,
-        lastname: data.lastname,
+        lastname: roleId === 2 ? undefined : data.lastname,
         user_id: newUserCreated.id,
       });
 

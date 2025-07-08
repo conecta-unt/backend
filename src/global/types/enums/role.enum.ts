@@ -4,20 +4,20 @@ export enum ClientRoleE {
 }
 
 export enum UniversityMemberE {
-  STUDENT = 'student',
   TEACHER = 'teacher',
+  STUDENT = 'student',
 }
 
 export enum RoleE {
   INDIVIDUAL_CLIENT = 'individual_client',
   BUSSINES_CLIENT = 'bussines_client',
-  STUDENT = 'student',
   TEACHER = 'teacher',
+  STUDENT = 'student',
 }
 
 export const roles = {
   individual_client: 1,
   bussines_client: 2,
-  student: 3,
-  teacher: 4,
+  teacher: 3,
+  student: 4,
 };
