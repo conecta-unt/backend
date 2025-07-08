@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { FastifyReply, FastifyRequest } from 'fastify';
 import { JwtService } from '@nestjs/jwt';
 import { BadRequestException, Injectable } from 'src/bootstrap';
 import { AppConfigService } from 'src/global/services/app-config.service';
@@ -19,6 +18,7 @@ import {
   roles,
   UniversityMemberE,
 } from 'src/global/types/enums/role.enum';
+import { Request, Response } from 'express';
 
 @Injectable()
 export class GoogleSocialLoginUseCase {
@@ -30,11 +30,7 @@ export class GoogleSocialLoginUseCase {
     private readonly user: UserRepository,
   ) {}
 
-  async execute(
-    req: FastifyRequest,
-    res: FastifyReply,
-    data: GoogleSocialLoginDTO,
-  ) {
+  async execute(req: Request, res: Response, data: GoogleSocialLoginDTO) {
     if (
       !data.code ||
       !data.metadata.redirectUrl ||
@@ -48,8 +44,8 @@ export class GoogleSocialLoginUseCase {
     if (!user) {
       if (!data.role) {
         res.redirect(
-          `${data.metadata.redirectErrorUrl}?error=account_not_found`,
           302,
+          `${data.metadata.redirectErrorUrl}?error=account_not_found`,
         );
         return;
       }
@@ -79,15 +75,15 @@ export class GoogleSocialLoginUseCase {
       await this.shared.sendWelcomeEmail(newUserCreated);
 
       await this.shared.generateSessionTokens(req, res, newUserCreated);
-      res.redirect(data.metadata.redirectUrl, 302);
+      res.redirect(302, data.metadata.redirectUrl);
     } else if (user.providerId !== this.config.googleProviderId) {
       res.redirect(
-        `${data.metadata.redirectErrorUrl}?error=provider_error`,
         302,
+        `${data.metadata.redirectErrorUrl}?error=provider_error`,
       );
     } else {
       await this.shared.generateSessionTokens(req, res, user);
-      res.redirect(data.metadata.redirectUrl, 302);
+      res.redirect(302, data.metadata.redirectUrl);
     }
   }
 

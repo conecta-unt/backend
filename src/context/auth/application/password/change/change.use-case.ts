@@ -1,5 +1,4 @@
 import * as argon2 from 'argon2';
-import { FastifyRequest } from 'fastify';
 import { Injectable } from 'src/bootstrap';
 import { ChangePasswordDTO } from './change.dto';
 import {
@@ -11,6 +10,7 @@ import {
 } from 'src/context/auth/domain';
 import { AppConfigService } from 'src/global/services/app-config.service';
 import { EmailService } from 'src/global/services/mail.service';
+import { Request } from 'express';
 
 @Injectable()
 export class ChangePasswordUseCase {
@@ -21,8 +21,8 @@ export class ChangePasswordUseCase {
     private readonly refreshToken: UserRefreshTokenRepository,
   ) {}
 
-  async execute(req: FastifyRequest, data: ChangePasswordDTO) {
-    const refresh_token = req.cookies.refresh_token;
+  async execute(req: Request, data: ChangePasswordDTO) {
+    const refresh_token = req.cookies.refresh_token as string;
 
     if (!refresh_token) throw new SessionExpiredException();
 

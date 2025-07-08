@@ -1,4 +1,3 @@
-import { FastifyReply, FastifyRequest } from 'fastify';
 import { Injectable } from 'src/bootstrap';
 import {
   InvalidUserProviderException,
@@ -14,6 +13,7 @@ import {
 import { AppConfigService } from 'src/global/services/app-config.service';
 import { UserLoginDTO } from './login.dto';
 import { AuthSharedService } from '../../shared/auth-shared.service';
+import { Request, Response } from 'express';
 
 @Injectable()
 export class UserLoginUseCase {
@@ -24,8 +24,9 @@ export class UserLoginUseCase {
     private readonly user: UserRepository,
   ) {}
 
-  async execute(req: FastifyRequest, res: FastifyReply, data: UserLoginDTO) {
-    if (await this._isBannedIp(req.ip)) throw new IPBlockedException();
+  async execute(req: Request, res: Response, data: UserLoginDTO) {
+    if (await this._isBannedIp(req.ip as string))
+      throw new IPBlockedException();
 
     let user: UserEntity | null = null;
 

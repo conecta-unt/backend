@@ -1,4 +1,4 @@
-import { FastifyRequest } from 'fastify';
+import { Request } from 'express';
 import { Injectable } from 'src/bootstrap';
 import { UserNotFoundException } from 'src/context/auth/domain';
 import {
@@ -18,11 +18,9 @@ export class GetUserProfileUseCase {
     private readonly role: InDatabaseRoleRepository,
   ) {}
 
-  async execute(req: FastifyRequest, q: string | undefined) {
+  async execute(req: Request, q: string | undefined) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const userPayload = (req as any).userPayload as UserPayload;
-
-    console.log(q);
 
     const user = q
       ? await this.user.findByUsername(q)

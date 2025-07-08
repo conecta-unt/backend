@@ -1,4 +1,4 @@
-import { FastifyReply } from 'fastify';
+import { Response } from 'express';
 import {
   ArgumentsHost,
   BadRequestException,
@@ -13,9 +13,9 @@ import {
 export class ErrorResponseNormalizerFilter implements ExceptionFilter {
   private readonly logger = new Logger(ErrorResponseNormalizerFilter.name);
 
-  async catch(rawException: Error, host: ArgumentsHost) {
+  catch(rawException: Error, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
-    const response = ctx.getResponse<FastifyReply>();
+    const response = ctx.getResponse<Response>();
 
     const exception =
       rawException instanceof HttpException
@@ -31,9 +31,7 @@ export class ErrorResponseNormalizerFilter implements ExceptionFilter {
         'ExceptionFilter',
       );
 
-    await response
-      .status(status)
-      .send({ error: this.mapToErrorResponse(exception) });
+    response.status(status).send({ error: this.mapToErrorResponse(exception) });
   }
 
   private mapToErrorResponse(error: HttpException) {

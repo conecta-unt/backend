@@ -1,6 +1,5 @@
 import * as argon2 from 'argon2';
 import { nanoid } from 'nanoid';
-import { FastifyReply, FastifyRequest } from 'fastify';
 import { JwtService } from '@nestjs/jwt';
 import { Injectable } from 'src/bootstrap';
 import {
@@ -14,6 +13,7 @@ import {
 import { AppConfigService } from 'src/global/services/app-config.service';
 import { CookieSerializeOptions } from '@fastify/cookie';
 import { EmailService } from 'src/global/services/mail.service';
+import { CookieOptions, Request, Response } from 'express';
 
 @Injectable()
 export class AuthSharedService {
@@ -29,7 +29,7 @@ export class AuthSharedService {
   ACCESS_TOKEN = 'access_token';
   REFRESH_TOKEN = 'refresh_token';
 
-  cookieConfig: CookieSerializeOptions = {
+  cookieConfig: CookieOptions = {
     path: '/',
     httpOnly: true,
     sameSite: 'strict',
@@ -40,11 +40,7 @@ export class AuthSharedService {
     return nanoid(32);
   }
 
-  async generateSessionTokens(
-    req: FastifyRequest,
-    res: FastifyReply,
-    user: UserEntity,
-  ) {
+  async generateSessionTokens(req: Request, res: Response, user: UserEntity) {
     const sessionTokens = {
       ...this.generateRefreshToken(),
       accessToken: this.generateAccessToken(user),
@@ -55,18 +51,18 @@ export class AuthSharedService {
       token: sessionTokens.refreshToken,
       expiresAt: sessionTokens.expiration,
       deviceInfo: req.headers['user-agent'] || '',
-      ipAddress: req.ip,
+      ipAddress: req.ip as string,
     });
     await this.refreshToken.create(newRefreshToken);
     await this.user.updateLastlogin(user.id);
 
     res
-      .setCookie(this.ACCESS_TOKEN, sessionTokens.accessToken, {
+      .cookie(this.ACCESS_TOKEN, sessionTokens.accessToken, {
         ...this.cookieConfig,
         domain: req.hostname,
         expires: new Date(Date.now() + this.config.accessTokenAlive.time),
       })
-      .setCookie(this.REFRESH_TOKEN, sessionTokens.refreshToken, {
+      .cookie(this.REFRESH_TOKEN, sessionTokens.refreshToken, {
         ...this.cookieConfig,
         domain: req.hostname,
         expires: sessionTokens.expiration,
@@ -99,7 +95,7 @@ export class AuthSharedService {
   }
 
   async createLoginAttemp(
-    req: FastifyRequest,
+    req: Request,
     userIdentificator?: string,
     userId?: number,
     success = false,
@@ -108,7 +104,7 @@ export class AuthSharedService {
       UserLoginAttempsEntity.create({
         userId: userId,
         userIdentificator,
-        ipAddress: req.ip,
+        ipAddress: req.ip as string,
         deviceInfo: req.headers['user-agent'] || '',
         success,
       }),

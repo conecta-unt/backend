@@ -1,4 +1,4 @@
-import { FastifyReply, FastifyRequest } from 'fastify';
+import { Request, Response } from 'express';
 import { Injectable } from 'src/bootstrap';
 import { UserRefreshTokenRepository } from 'src/context/auth/domain';
 
@@ -6,8 +6,8 @@ import { UserRefreshTokenRepository } from 'src/context/auth/domain';
 export class UserLogoutUseCase {
   constructor(private readonly refreshToken: UserRefreshTokenRepository) {}
 
-  async execute(req: FastifyRequest, res: FastifyReply) {
-    const refresh_token = req.cookies.refresh_token;
+  async execute(req: Request, res: Response) {
+    const refresh_token = req.cookies.refresh_token as string;
 
     if (!refresh_token) return;
 

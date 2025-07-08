@@ -1,4 +1,3 @@
-import { FastifyRequest } from 'fastify';
 import { Injectable } from 'src/bootstrap';
 import { UpdateUserProfileDTO } from './update.dto';
 import {
@@ -7,6 +6,7 @@ import {
 } from 'src/context/auth/infrastructure/persistence';
 import { UserPayload } from 'src/global/types/user';
 import { UserNotFoundException } from 'src/context/auth/domain';
+import { Request } from 'express';
 
 @Injectable()
 export class UpdateUserProfileUseCase {
@@ -15,7 +15,7 @@ export class UpdateUserProfileUseCase {
     private readonly user: InDatabaseUserRepository,
   ) {}
 
-  async execute(req: FastifyRequest, data: UpdateUserProfileDTO) {
+  async execute(req: Request, data: UpdateUserProfileDTO) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const userPayload = (req as any).userPayload as UserPayload;
 

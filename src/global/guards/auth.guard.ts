@@ -1,5 +1,4 @@
 import { JwtService } from '@nestjs/jwt';
-import { FastifyRequest } from 'fastify';
 import {
   CanActivate,
   ExecutionContext,
@@ -7,15 +6,16 @@ import {
   UnauthorizedException,
 } from 'src/bootstrap';
 import { UserPayload } from '../types/user';
+import { Request } from 'express';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(private readonly jwt: JwtService) {}
 
   canActivate(context: ExecutionContext): boolean {
-    const request = context.switchToHttp().getRequest<FastifyRequest>();
+    const request = context.switchToHttp().getRequest<Request>();
 
-    const access_token = request.cookies['access_token'];
+    const access_token = request.cookies.access_token as string;
 
     if (!access_token) throw new UnauthorizedException('Token not provided');
 

@@ -1,5 +1,5 @@
 import { JwtService } from '@nestjs/jwt';
-import { FastifyReply, FastifyRequest } from 'fastify';
+import { Request, Response } from 'express';
 import { Injectable } from 'src/bootstrap';
 import {
   SessionExpiredException,
@@ -18,8 +18,8 @@ export class RefreshTokenUseCase {
     private readonly user: UserRepository,
   ) {}
 
-  async execute(req: FastifyRequest, res: FastifyReply) {
-    const refresh_token = req.cookies.refresh_token;
+  async execute(req: Request, res: Response) {
+    const refresh_token = req.cookies.refresh_token as string;
 
     if (!refresh_token) throw new SessionExpiredException();
 
@@ -31,7 +31,7 @@ export class RefreshTokenUseCase {
     const user = await this.user.findById(token.userId);
     if (!user) throw new SessionExpiredException();
 
-    res.setCookie('access_token', this._generateAccessToken(user), {
+    res.cookie('access_token', this._generateAccessToken(user), {
       domain: req.hostname,
       expires: new Date(Date.now() + this.config.accessTokenAlive.time),
       path: '/',

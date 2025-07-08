@@ -121,6 +121,20 @@ export class AppConfigService {
     return this.config.get<string>('GOOGLE_CLIENT_SECRET') || '';
   }
 
+  // Cloudinary
+
+  get cloud_name(): string {
+    return this.config.get<string>('CLOUDINARY_CLOUD_NAME') || '';
+  }
+
+  get api_key(): string {
+    return this.config.get<string>('CLOUDINARY_API_KEY') || '';
+  }
+
+  get api_secret(): string {
+    return this.config.get<string>('CLOUDINARY_API_SECRET') || '';
+  }
+
   // Database Configuration
 
   get mainDatabase(): {

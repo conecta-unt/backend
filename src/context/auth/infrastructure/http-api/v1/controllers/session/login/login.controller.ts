@@ -1,8 +1,8 @@
-import { FastifyReply, FastifyRequest } from 'fastify';
 import { Body, Controller, Post, Query, Req, Res } from 'src/bootstrap';
 import { UserLoginUseCase } from 'src/context/auth/application/session/login/login.use-case';
 import { AUTH_API_V1_BASE_PATH } from '../../../constants';
 import { UserLoginDTO } from './login.dto';
+import { Request, Response } from 'express';
 
 @Controller(`${AUTH_API_V1_BASE_PATH}/session/login`)
 export class UserLoginController {
@@ -10,8 +10,8 @@ export class UserLoginController {
 
   @Post()
   run(
-    @Req() req: FastifyRequest,
-    @Res() res: FastifyReply,
+    @Req() req: Request,
+    @Res() res: Response,
     @Query('redirect-url') redirectURL: string,
     @Body() data: UserLoginDTO,
   ) {
