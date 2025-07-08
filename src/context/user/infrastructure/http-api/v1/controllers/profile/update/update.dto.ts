@@ -10,7 +10,7 @@ export class UpdateUserProfileDTO {
   @IsOptional()
   @IsString()
   @MinLength(1)
-  @MaxLength(255)
+  @MaxLength(100)
   area?: string;
 
   @IsOptional()

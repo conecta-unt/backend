@@ -36,9 +36,12 @@ export class GetUserProfileUseCase {
       email: user.email,
       provider: provider?.name,
       role: role?.name,
-      firsname: profile?.firstname,
+      firstname: profile?.firstname,
       lastname: profile?.lastname,
       profileImage: profile?.profileImage,
+      major: profile?.major,
+      area: profile?.area,
+      bio: profile?.bio,
     };
   }
 }
