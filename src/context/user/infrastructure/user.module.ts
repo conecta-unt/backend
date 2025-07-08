@@ -4,11 +4,13 @@ import {
   FindUsernameController,
   GetUserProfileController,
   UpdateUserProfileController,
+  UploadProfileImageController,
 } from './http-api';
 import {
   FindUsernameUseCase,
   GetUserProfileUseCase,
   UpdateUserProfileUseCase,
+  UploadProfileImageUseCase,
 } from '../application';
 
 @Module({
@@ -19,6 +21,7 @@ import {
     GetUserProfileController,
     // Profile
     UpdateUserProfileController,
+    UploadProfileImageController,
   ],
   providers: [
     // Info
@@ -26,6 +29,7 @@ import {
     GetUserProfileUseCase,
     // Profile
     UpdateUserProfileUseCase,
+    UploadProfileImageUseCase,
   ],
   exports: [
     // Info
@@ -33,6 +37,7 @@ import {
     GetUserProfileUseCase,
     // Profile
     UpdateUserProfileUseCase,
+    UploadProfileImageUseCase,
   ],
 })
 export class UserModule {}
