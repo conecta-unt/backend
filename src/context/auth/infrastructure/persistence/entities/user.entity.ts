@@ -7,9 +7,11 @@ import {
   BaseEntity,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 import { Role } from './role.entity';
 import { Provider } from './provider.entity';
+import { Member } from './member.entity';
 
 @Entity({ name: 'user' })
 export class User extends BaseEntity {
@@ -47,4 +49,7 @@ export class User extends BaseEntity {
 
   @Column({ type: 'timestamp', nullable: true })
   lastLogin: Date;
+
+  @OneToMany(() => Member, (member) => member.user)
+  members: Member[];
 }

@@ -25,6 +25,8 @@ import {
   UserRefreshConfirmationTokenUseCase,
 } from '../application';
 import {
+  MemberRepository,
+  TeamRepository,
   UserConfirmationTokenRepository,
   UserLoginAttempsRepository,
   UserProfileRepository,
@@ -34,8 +36,10 @@ import {
   UserRoleRepository,
 } from '../domain';
 import {
+  InDatabaseMemberRepository,
   InDatabaseProviderRepository,
   InDatabaseRoleRepository,
+  InDatabaseTeamRepository,
   InDatabaseUserConfirmationTokenRepository,
   InDatabaseUserLoginAttemptsRepository,
   InDatabaseUserProfileRepository,
@@ -106,6 +110,14 @@ import {
       provide: UserRepository,
       useClass: InDatabaseUserRepository,
     },
+    {
+      provide: MemberRepository,
+      useClass: InDatabaseMemberRepository,
+    },
+    {
+      provide: TeamRepository,
+      useClass: InDatabaseTeamRepository,
+    },
     InDatabaseUserConfirmationTokenRepository,
     InDatabaseUserLoginAttemptsRepository,
     InDatabaseUserProfileRepository,
@@ -113,6 +125,8 @@ import {
     InDatabaseProviderRepository,
     InDatabaseUserRefreshTokenRepository,
     InDatabaseUserRepository,
+    InDatabaseMemberRepository,
+    InDatabaseTeamRepository,
   ],
   exports: [
     // Account
@@ -137,6 +151,8 @@ import {
     InDatabaseProviderRepository,
     InDatabaseUserRefreshTokenRepository,
     InDatabaseUserRepository,
+    InDatabaseMemberRepository,
+    InDatabaseTeamRepository,
   ],
 })
 export class AuthModule {}

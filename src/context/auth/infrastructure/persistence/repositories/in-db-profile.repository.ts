@@ -19,6 +19,27 @@ export class InDatabaseUserProfileRepository implements UserProfileRepository {
       : null;
   }
 
+  async filterByUsername(username: string): Promise<any[]> {
+    const profiles = await UserProfile.createQueryBuilder('profile')
+      .innerJoinAndSelect('profile.user', 'user')
+      .where('LOWER(user.username) LIKE :username', {
+        username: `%${username.toLowerCase()}%`,
+      })
+      .andWhere('user.role IN (:...roles)', {
+        roles: [3, 4],
+      })
+      .limit(10)
+      .getMany();
+
+    return profiles.map((profile) => ({
+      id: profile.userId,
+      username: profile.user.username,
+      firstname: profile.firstname,
+      lasname: profile.lastname,
+      profileImage: profile.profileImage,
+    }));
+  }
+
   async create(data: UserProfileEntity): Promise<UserProfileEntity> {
     const user = UserProfile.create({
       user: { id: data.user_id } as User,

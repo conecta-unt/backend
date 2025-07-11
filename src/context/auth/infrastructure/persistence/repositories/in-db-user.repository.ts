@@ -2,7 +2,6 @@ import { Injectable } from 'src/bootstrap';
 import { UserEntity, UserRepository } from 'src/context/auth/domain';
 import { User } from '../entities/user.entity';
 import { Provider, Role } from '../entities';
-import { FullUserEntity } from 'src/context/auth/domain/entities/full-user.entity';
 
 @Injectable()
 export class InDatabaseUserRepository implements UserRepository {
