@@ -7,11 +7,15 @@ import { DeepPartial } from 'typeorm';
 
 @Injectable()
 export class InDatabaseMemberRepository implements MemberRepository {
-  async createMany(teamId: number, members: { id: number; role: string }[]) {
+  async createMany(
+    teamId: number,
+    members: { id: number; role: string; confirmed?: boolean }[],
+  ) {
     const _members: DeepPartial<Member>[] = members.map((member) => ({
       team: { id: teamId } as Team,
       user: { id: member.id } as User,
       role: member.role,
+      confirmed: member.confirmed ? true : false,
     }));
 
     const memberTeam = Member.create(_members);

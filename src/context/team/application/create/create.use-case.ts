@@ -23,7 +23,11 @@ export class CreateTeamUseCase {
     const members: {
       id: number;
       role: 'colaborator' | 'supervisor' | 'owner';
-    }[] = [{ id: userPayload.id, role: 'owner' }, ...data.members];
+      confirmed?: boolean;
+    }[] = [
+      { id: userPayload.id, role: 'owner', confirmed: true },
+      ...data.members,
+    ];
 
     await this.member.createMany(newTeam.id, members);
   }
