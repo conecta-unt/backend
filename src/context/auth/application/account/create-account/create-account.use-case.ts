@@ -82,7 +82,7 @@ export class CreateUserAccountUseCase {
     this.mailer
       .sendEmail({
         email: data.email,
-        subject: `Confirm your account on ${this.config.serviceName}`,
+        subject: `Confirma tu cuenta en ${this.config.serviceName}`,
         template: 'account-confirmation',
         context: {
           userName: data.username,

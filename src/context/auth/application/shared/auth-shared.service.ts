@@ -123,7 +123,7 @@ export class AuthSharedService {
   async sendWelcomeEmail(user: UserEntity) {
     await this.mailer.sendEmail({
       email: user.email,
-      subject: `Confirm your account on ${this.config.serviceName}`,
+      subject: `Confirma tu cuenta en ${this.config.serviceName}`,
       template: 'account-created',
       context: {
         userName: user.username,

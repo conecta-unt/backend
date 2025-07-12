@@ -48,7 +48,7 @@ export class ChangePasswordUseCase {
     this.mailer
       .sendEmail({
         email: user.email,
-        subject: `Your ${this.config.serviceName} password was changed`,
+        subject: `Tu contraseña ${this.config.serviceName} ha sido cambiada`,
         template: 'password-changed',
         context: {
           userName: user.username,
