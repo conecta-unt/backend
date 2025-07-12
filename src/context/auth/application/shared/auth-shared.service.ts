@@ -1,5 +1,6 @@
 import * as argon2 from 'argon2';
 import { nanoid } from 'nanoid';
+import { CookieOptions, Request, Response } from 'express';
 import { JwtService } from '@nestjs/jwt';
 import { Injectable } from 'src/bootstrap';
 import {
@@ -11,9 +12,7 @@ import {
   UserRepository,
 } from '../../domain';
 import { AppConfigService } from 'src/global/services/app-config.service';
-import { CookieSerializeOptions } from '@fastify/cookie';
 import { EmailService } from 'src/global/services/mail.service';
-import { CookieOptions, Request, Response } from 'express';
 
 @Injectable()
 export class AuthSharedService {
@@ -32,8 +31,8 @@ export class AuthSharedService {
   cookieConfig: CookieOptions = {
     path: '/',
     httpOnly: true,
-    sameSite: 'strict',
-    secure: false,
+    sameSite: 'none',
+    secure: true,
   };
 
   createToken() {

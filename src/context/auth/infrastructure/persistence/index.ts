@@ -1,6 +1,7 @@
 export * from './entities/confirmation-token.entity';
 export * from './entities/login-attemps.entity';
 export * from './entities/member.entity';
+export * from './entities/offer.entity';
 export * from './entities/profile.entity';
 export * from './entities/provider.entity';
 export * from './entities/refresh-token.entity';

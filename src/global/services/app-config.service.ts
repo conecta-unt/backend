@@ -76,7 +76,10 @@ export class AppConfigService {
   // Client Configuration
 
   get clients_url(): string[] {
-    return [this.config.get<string>('CLIENT_1_URL') || 'http://localhost:3000'];
+    return [
+      this.config.get<string>('CLIENT_1_URL') || 'http://localhost:3000',
+      'https://0fd959dcc709.ngrok-free.app',
+    ];
   }
 
   // Session Configuration
