@@ -15,7 +15,7 @@ export class InDatabaseMemberRepository implements MemberRepository {
       team: { id: teamId } as Team,
       user: { id: member.id } as User,
       role: member.role,
-      confirmed: member.confirmed ? true : false,
+      confirmed: member.confirmed,
     }));
 
     const memberTeam = Member.create(_members);

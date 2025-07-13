@@ -12,6 +12,9 @@ import {
   UserConfirmationToken,
   UserProfile,
   UserRefreshToken,
+  Member,
+  Offer,
+  Team,
 } from '../src/context/auth/infrastructure/persistence/entities';
 
 const dataSource = new DataSource({
@@ -25,10 +28,13 @@ const dataSource = new DataSource({
   entities: [
     UserConfirmationToken,
     UserLoginAttemps,
+    Member,
+    Offer,
     UserProfile,
     Provider,
     UserRefreshToken,
     Role,
+    Team,
     User,
   ],
   timezone: 'Z',

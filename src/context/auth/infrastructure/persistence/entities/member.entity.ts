@@ -19,6 +19,6 @@ export class Member extends BaseEntity {
   @Column({ type: 'varchar', length: 30 })
   role: string;
 
-  @Column({ type: 'boolean', default: false })
+  @Column({ type: 'boolean', nullable: true })
   confirmed: boolean;
 }

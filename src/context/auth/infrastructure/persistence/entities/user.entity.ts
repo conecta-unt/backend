@@ -8,10 +8,12 @@ import {
   ManyToOne,
   JoinColumn,
   OneToMany,
+  OneToOne,
 } from 'typeorm';
 import { Role } from './role.entity';
 import { Provider } from './provider.entity';
 import { Member } from './member.entity';
+import { UserProfile } from './profile.entity';
 
 @Entity({ name: 'user' })
 export class User extends BaseEntity {
@@ -52,4 +54,7 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Member, (member) => member.user)
   members: Member[];
+
+  @OneToOne(() => UserProfile, (profile) => profile.user)
+  profile: UserProfile;
 }
