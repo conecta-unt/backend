@@ -19,7 +19,7 @@ export class InDatabaseUserProfileRepository implements UserProfileRepository {
       : null;
   }
 
-  async filterByUsername(username: string): Promise<any[]> {
+  async filterByUsername(userId: number, username: string): Promise<any[]> {
     const profiles = await UserProfile.createQueryBuilder('profile')
       .innerJoinAndSelect('profile.user', 'user')
       .where('LOWER(user.username) LIKE :username', {
@@ -28,6 +28,7 @@ export class InDatabaseUserProfileRepository implements UserProfileRepository {
       .andWhere('user.role IN (:...roles)', {
         roles: [3, 4],
       })
+      .andWhere('user.id != :userId', { userId })
       .limit(10)
       .getMany();
 
