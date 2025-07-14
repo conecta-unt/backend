@@ -2,12 +2,14 @@ import { Module } from '@nestjs/common';
 import {
   CreateOfferController,
   FindAllOffersController,
+  FindAllPostulationsOfAClientOfferController,
   FindOneOfferController,
   FindUserOffersController,
 } from './controllers';
 import {
   CreateOfferUseCase,
   FindAllOffersUseCase,
+  FindAllPostulationsOfAClientOfferUseCase,
   FindOneOfferUseCase,
   FindUserOffersUseCase,
 } from './application';
@@ -17,6 +19,7 @@ import {
     //Create
     CreateOfferController,
     //Find
+    FindAllPostulationsOfAClientOfferController,
     FindUserOffersController,
     FindAllOffersController,
     FindOneOfferController,
@@ -25,6 +28,7 @@ import {
     //Offer
     CreateOfferUseCase,
     // Find
+    FindAllPostulationsOfAClientOfferUseCase,
     FindUserOffersUseCase,
     FindAllOffersUseCase,
     FindOneOfferUseCase,
@@ -33,6 +37,7 @@ import {
     //Offer
     CreateOfferUseCase,
     // Find
+    FindAllPostulationsOfAClientOfferUseCase,
     FindUserOffersUseCase,
     FindAllOffersUseCase,
     FindOneOfferUseCase,

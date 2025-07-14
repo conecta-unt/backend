@@ -14,13 +14,13 @@ export class Postulation extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Offer, (offer) => offer.id, { nullable: true })
+  @ManyToOne(() => Offer, (offer) => offer.postulation, { nullable: true })
   offer: Offer;
 
-  @ManyToOne(() => User, (user) => user.id, { nullable: true })
+  @ManyToOne(() => User, (user) => user.postulation, { nullable: true })
   user: User;
 
-  @ManyToOne(() => Team, (team) => team.id, { nullable: true })
+  @ManyToOne(() => Team, (team) => team.postulation, { nullable: true })
   team: Team;
 
   @Column({ type: 'boolean', nullable: true })
