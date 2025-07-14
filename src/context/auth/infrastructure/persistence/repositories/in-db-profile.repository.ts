@@ -22,6 +22,7 @@ export class InDatabaseUserProfileRepository implements UserProfileRepository {
   async filterByUsername(userId: number, username: string): Promise<any[]> {
     const profiles = await UserProfile.createQueryBuilder('profile')
       .innerJoinAndSelect('profile.user', 'user')
+      .innerJoinAndSelect('user.role', 'name')
       .where('LOWER(user.username) LIKE :username', {
         username: `%${username.toLowerCase()}%`,
       })
@@ -38,6 +39,7 @@ export class InDatabaseUserProfileRepository implements UserProfileRepository {
       firstname: profile.firstname,
       lasname: profile.lastname,
       profileImage: profile.profileImage,
+      role: profile.user.role.name,
     }));
   }
 

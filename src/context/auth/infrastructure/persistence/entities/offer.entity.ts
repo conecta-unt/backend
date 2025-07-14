@@ -4,9 +4,11 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { User } from './user.entity';
+import { Postulation } from './postulation.entity';
 
 @Entity({ name: 'offer' })
 export class Offer extends BaseEntity {
@@ -15,6 +17,9 @@ export class Offer extends BaseEntity {
 
   @ManyToOne(() => User, (user) => user.id, { nullable: true })
   user: User;
+
+  @OneToMany(() => Postulation, (postulation) => postulation.offer)
+  postulation: Postulation[];
 
   @Column({ type: 'varchar', length: 20 })
   type: string;
@@ -27,6 +32,9 @@ export class Offer extends BaseEntity {
 
   @Column({ type: 'boolean' })
   teamRequired: boolean;
+
+  @Column({ type: 'boolean', default: true })
+  isAvailable: boolean;
 
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;

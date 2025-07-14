@@ -5,11 +5,10 @@ import { Offer } from 'src/context/auth/infrastructure/persistence';
 export class FindAllOffersUseCase {
   async execute(limit: number | undefined) {
     const offers = await Offer.find({
+      where: { isAvailable: true },
       relations: ['user', 'user.profile', 'user.role'],
       take: limit,
-      order: {
-        createdAt: 'DESC',
-      },
+      order: { createdAt: 'DESC' },
     });
 
     return offers.map((offer) => ({

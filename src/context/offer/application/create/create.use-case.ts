@@ -53,8 +53,8 @@ export class CreateOfferUseCase {
         serviceName: this.config.serviceName,
         type,
         description: data.description,
-        supervisorRequired: data.supervisorRequired ? 'Sí' : 'No',
-        teamRequired: data.team ? 'Sí' : 'No',
+        supervisorRequired: data.supervisorRequired,
+        teamRequired: data.team,
         createdAt: `${now.toLocaleDateString('es-PE')} ${now.toLocaleTimeString('es-PE')}`,
       },
     });

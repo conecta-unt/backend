@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Member } from './member.entity';
+import { Postulation } from './postulation.entity';
 
 @Entity({ name: 'team' })
 export class Team extends BaseEntity {
@@ -17,4 +18,7 @@ export class Team extends BaseEntity {
 
   @OneToMany(() => Member, (member) => member.team)
   members: Member[];
+
+  @OneToMany(() => Postulation, (postulation) => postulation.team)
+  postulation: Postulation[];
 }

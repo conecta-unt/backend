@@ -14,6 +14,7 @@ import { Role } from './role.entity';
 import { Provider } from './provider.entity';
 import { Member } from './member.entity';
 import { UserProfile } from './profile.entity';
+import { Postulation } from './postulation.entity';
 
 @Entity({ name: 'user' })
 export class User extends BaseEntity {
@@ -57,4 +58,7 @@ export class User extends BaseEntity {
 
   @OneToOne(() => UserProfile, (profile) => profile.user)
   profile: UserProfile;
+
+  @OneToMany(() => Postulation, (postulation) => postulation.user)
+  postulation: Postulation[];
 }
