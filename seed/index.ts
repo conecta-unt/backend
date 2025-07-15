@@ -15,6 +15,7 @@ import {
   Member,
   Offer,
   Team,
+  Postulation,
 } from '../src/context/auth/infrastructure/persistence/entities';
 
 const dataSource = new DataSource({
@@ -30,6 +31,7 @@ const dataSource = new DataSource({
     UserLoginAttemps,
     Member,
     Offer,
+    Postulation,
     UserProfile,
     Provider,
     UserRefreshToken,
